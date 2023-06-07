@@ -10,10 +10,16 @@ logging:
 
 spring:
   datasource:
+#    mysql 주소
     url: jdbc:mysql://localhost:3306/board
     username: jiwoo
     password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+#   h2 주소
+#    url: jdbc:h2:mem:testdb
+#    username: sa
+#    driver-class-name: org.h2.Driver
   jpa:
     # spring 3.1.0 dialect ??
 #    database: mysql
@@ -40,6 +46,7 @@ spring:
     url: jdbc:h2:mem:board;mode=mysql
     driverClassName: org.h2.Driver
   sql.init.mode: always
+  h2.console.enabled: true
 #  test.database.replace: none
 
 
