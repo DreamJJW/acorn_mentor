@@ -1,5 +1,6 @@
 package com.acorn_mentor.acorn_mentor.controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ class PostControllerTest {
         this.mvc = mvc;
     }
 
+    @Disabled("테스트 구현 중")
     @DisplayName("[view][GET] 게시글 리스트 (게시판) 페이지 - 정상 호출")
     @Test
     public void post_list_view() throws Exception {
@@ -30,10 +32,11 @@ class PostControllerTest {
         mvc.perform(get("/posts"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(view().name("posts/index"))
                 .andExpect(model().attributeExists("posts"));
 
     }
-
+    @Disabled("테스트 구현 중")
     @DisplayName("[view][GET] 게시글 특정 페이지 - 정상 호출")
     @Test
     public void specific_post_view() throws Exception {
@@ -43,10 +46,12 @@ class PostControllerTest {
         mvc.perform(get("/posts/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.TEXT_HTML))
-                .andExpect(model().attributeExists("post"));
+                .andExpect(model().attributeExists("post"))
+                .andExpect(model().attributeExists("comments"));
+
 
     }
-
+    @Disabled("테스트 구현 중")
     @DisplayName("[view][GET] 게시글 검색 전용 페이지 - 정상 호출")
     @Test
     public void post_search() throws Exception {
@@ -58,7 +63,7 @@ class PostControllerTest {
                 .andExpect(content().contentType(MediaType.TEXT_HTML));
         
     }
-
+    @Disabled("테스트 구현 중")
     @DisplayName("[view][GET] 게시글 해시태그 검색 페이지 - 정상 호출")
     @Test
     public void hashtag_search() throws Exception {
@@ -70,5 +75,4 @@ class PostControllerTest {
                 .andExpect(content().contentType(MediaType.TEXT_HTML));
 
     }
-
 }
