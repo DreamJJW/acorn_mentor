@@ -27,7 +27,7 @@ class PostControllerTest {
         // given
 
         // when & then
-        mvc.perform(MockMvcRequestBuilders.get("/index"))
+        mvc.perform(MockMvcRequestBuilders.get("/posts/index"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(model().attributeExists("posts"));
@@ -43,6 +43,7 @@ class PostControllerTest {
         mvc.perform(get("/posts/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+                .andExpect(view().name("posts/detail"))
                 .andExpect(model().attributeExists("post"))
                 .andExpect(model().attributeExists("comments"));
 
