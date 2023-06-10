@@ -7,19 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @DisplayName("View 컨트롤러 - 게시글")
-@WebMvcTest(PostControllerTest.class) // PostController 만 읽어들이고 테스트 실행.
+@WebMvcTest(PostController.class) // PostController 만 읽어들이고 테스트 실행.
 class PostControllerTest {
 
     private final MockMvc mvc;
 
-    public PostControllerTest(@Autowired MockMvc mvc) {
-        this.mvc = mvc;
-    }
+    public PostControllerTest(@Autowired MockMvc mvc) { this.mvc = mvc;}
 
 //    @Disabled("테스트 구현 중")
     @DisplayName("[view][GET] 게시글 리스트 (게시판) 페이지 - 정상 호출")
@@ -28,10 +27,12 @@ class PostControllerTest {
         // given
 
         // when & then
-        mvc.perform(get("/posts/"))
-                .andExpect(status().isOk());
-
+        mvc.perform(MockMvcRequestBuilders.get("/index"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+                .andExpect(model().attributeExists("posts"));
     }
+
     @Disabled("테스트 구현 중")
     @DisplayName("[view][GET] 게시글 특정 페이지 - 정상 호출")
     @Test
