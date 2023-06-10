@@ -42,7 +42,7 @@ class PostControllerTest {
         // when & then
         mvc.perform(get("/posts/1"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(model().attributeExists("post"))
                 .andExpect(model().attributeExists("comments"));
 
@@ -57,7 +57,7 @@ class PostControllerTest {
         // when & then
         mvc.perform(get("/posts/search"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
         
     }
     @Disabled("테스트 구현 중")
@@ -69,7 +69,7 @@ class PostControllerTest {
         // when & then
         mvc.perform(get("/posts/search-hashtag"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
 
     }
 }
