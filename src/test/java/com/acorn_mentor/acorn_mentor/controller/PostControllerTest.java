@@ -1,10 +1,12 @@
 package com.acorn_mentor.acorn_mentor.controller;
 
+import com.acorn_mentor.acorn_mentor.config.SecurityConfig;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -13,6 +15,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @DisplayName("View 컨트롤러 - 게시글")
+@Import(SecurityConfig.class)
 @WebMvcTest(PostController.class) // PostController 만 읽어들이고 테스트 실행.
 class PostControllerTest {
 
@@ -27,7 +30,7 @@ class PostControllerTest {
         // given
 
         // when & then
-        mvc.perform(MockMvcRequestBuilders.get("/posts/index"))
+        mvc.perform(MockMvcRequestBuilders.get("/index"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(model().attributeExists("posts"));
