@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
-@ToString
+@ToString(callSuper = true)
 @Table(indexes = {
         @Index(columnList = "content"),
         @Index(columnList = "createdDate"),
@@ -28,19 +28,22 @@ public class Comment extends AuditingField{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 댓글 id
 
+    @Setter @ManyToOne(optional = false) private UserAccount userAccount; // 유저 ID
+
     @Setter @Column(nullable = false, length = 500) private String content; // 댓글 내용
     @Setter @ManyToOne(optional = false) private Post post; // 게시글 id
 
     protected Comment() {
     }
 
-    private Comment(String content, Post post) {
+    private Comment(UserAccount userAccount, String content, Post post) {
+        this.userAccount = userAccount;
         this.content = content;
         this.post = post;
     }
 
-    public static Comment of(String content, Post post) {
-        return new Comment(content, post);
+    public static Comment of(UserAccount userAccount, String content, Post post) {
+        return new Comment(userAccount, content, post);
     }
 
     @Override

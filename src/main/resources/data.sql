@@ -1,3 +1,5 @@
+insert into UserAccount(user_id, user_pw, nickname, email, created_date, created_by, modified_date, modified_by) values ('jiwoo', '1234', 'jiwo', ' jiwoo@naver.com', now(), 'jiwoo', now(), 'jiwoo');
+
 insert into post (title, content, hashtag, created_date, created_by, modified_date, modified_by) values ('quam', 'Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy.', 'Mauv', '2022-11-01 05:36:52', 'Ignazio', '2022-07-01 01:45:43', 'Edeline');
 insert into post (title, content, hashtag, created_date, created_by, modified_date, modified_by) values ('quam', 'Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', 'Green', '2023-03-28 08:57:23', 'Leanor', '2022-07-03 15:14:46', 'Cass');
 insert into post (title, content, hashtag, created_date, created_by, modified_date, modified_by) values ('in', 'Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.', 'Goldenrod', '2022-07-04 03:59:18', 'Siffre', '2022-11-01 02:29:32', 'Lexi');

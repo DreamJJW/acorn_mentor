@@ -16,7 +16,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Getter
-@ToString
+@ToString(callSuper = true)
 @Table(indexes = {
         @Index(columnList = "title"),
         @Index(columnList = "hashtag"),
@@ -29,6 +29,8 @@ public class Post extends AuditingField{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 게시글 id
+
+    @Setter @ManyToOne(optional = false) private UserAccount userAccount; // 유저 ID
     
     @Setter @Column(nullable = false) private String title; // 게시글 제목
     @Setter @Column(nullable = false, length = 10000) private String content; // 게시글 본문
@@ -36,7 +38,7 @@ public class Post extends AuditingField{
     @Setter private String hashtag; // 해시태그
 
     @ToString.Exclude
-    @OrderBy("id")
+    @OrderBy("createdDate DESC") // 시간 순 정렬
     // Cascading
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     // 게시글의 댓글에는 중복을 허락하지 않고 콜렉션으로 본다.
@@ -44,7 +46,8 @@ public class Post extends AuditingField{
 
     protected Post() {}
 
-    public Post(String title, String content, String hashtag) {
+    public Post(UserAccount userAccount, String title, String content, String hashtag) {
+        this.userAccount = userAccount;
         this.title = title;
         this.content = content;
         this.hashtag = hashtag;
@@ -64,8 +67,8 @@ public class Post extends AuditingField{
         return Objects.hash(id);
     }
 
-    public static Post of(String title, String content, String hashtag) {
-        return new Post(title, content, hashtag);
+    public static Post of(UserAccount userAccount, String title, String content, String hashtag) {
+        return new Post(userAccount, title, content, hashtag);
     }
 
 
