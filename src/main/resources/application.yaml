@@ -13,7 +13,7 @@ spring:
 #    mysql 주소
     url: jdbc:mysql://localhost:3306/board
     username: jiwoo
-    password: asuna3883!
+    password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 #   h2 주소
